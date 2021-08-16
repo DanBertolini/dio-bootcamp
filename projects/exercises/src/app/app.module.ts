@@ -9,7 +9,9 @@ import { AppComponent } from './app.component';
 registerLocaleData(ptBr);
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        AppComponent,
+    ],
     imports: [
         BrowserModule,
         FormsModule,
