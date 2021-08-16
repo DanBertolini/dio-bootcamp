@@ -1,0 +1,126 @@
+<main>
+    <div class="page-title">
+        <h2 id="shopping-chart-title">Meu Carrinho</h2>
+        <hr />
+    </div>
+    <section *ngIf="(shoppingBooks | async)!.length > 0">
+        <div>
+            <h3>Compra de Livros</h3>
+        </div>
+        <div>
+            <div class="books-cart">
+                <div *ngFor="let sBook of (shoppingBooks | async)" class="book-cart">
+                    <div class="book-info">
+                        <img [src]="sBook.cover" class="cover" />
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">{{ sBook.title }}</h3>
+                        <span class="book-value">
+                            <span>{{ sBook.value | currency: 'BRL' }} X </span>
+                            <div *ngIf="!sBook.isEditCart" class="d-inline-block">
+                                <span class="units-label" (click)="sBook.isEditCart = true">{{ sBook.units
+                                    }}</span>
+                                <span class="ms-1">{{sBook.units > 1 ? 'unidades' : 'unidade' }}</span>
+                            </div>
+                            <div *ngIf="sBook.isEditCart" class="d-inline-block">
+                                <input type="number" class="form-control units-input" [value]="sBook.units" [min]="1"
+                                    required #units (keyup)="cdr.detectChanges()">
+                                <i class="fas fa-check ms-2 me-2 save-edit"
+                                    [ngClass]="{ 'disabled': units.value === '' || units.value === '0'}"
+                                    (click)="units.value === '' || units.value === '0' ? '' : updateUnits(sBook, units.value)"></i>
+                                <i class="fas fa-times ms-2 me-2 cancel-edit" (click)="sBook.isEditCart = false"></i>
+                            </div>
+                        </span>
+                        <div class="total-item">
+                            <span><strong>Valor total do Item: </strong>{{ sBook.value * sBook.units |
+                                currency: 'BRL'}}</span>
+                        </div>
+                    </div>
+                    <div class="cart-item-action">
+                        <div class="cart-item-action-options">
+                            <i class="fas fa-trash delete" (click)="removeShopItem(sBook.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="(rentingBooks | async)!.length > 0">
+        <div>
+            <h3>Aluguel de Livros</h3>
+            <div class="books-cart">
+                <div *ngFor="let rBook of (rentingBooks | async)" class="book-cart">
+                    <div class="book-info">
+                        <img [src]="rBook.cover" class="cover" />
+                    </div>
+                    <div class="book-content">
+                        <h3 class="book-title">{{ rBook.title }}</h3>
+                        <span class="book-value">
+                            <span>{{ rBook.value | currency: 'BRL' }} X </span>
+                            <div *ngIf="!rBook.isEditCart" class="d-inline-block">
+                                <span class="rent-days-label" (click)="rBook.isEditCart = true">{{ rBook.rentDays
+                                    }}</span>
+                                <span class="ms-1">{{rBook.rentDays > 1 ? 'dias' : 'dia' }}</span>
+                            </div>
+                            <div *ngIf="rBook.isEditCart" class="d-inline-block">
+                                <input type="number" class="form-control rent-days-input" [value]="rBook.rentDays"
+                                    [min]="1" required #rentDays (keyup)="cdr.detectChanges()">
+                                <i class="fas fa-check ms-2 me-2 save-edit"
+                                    [ngClass]="{ 'disabled': rentDays.value === '' || rentDays.value === '0'}"
+                                    (click)="rentDays.value === '' || rentDays.value === '0' ? '' : updateRentDays(rBook, rentDays.value)"></i>
+                                <i class="fas fa-times ms-2 me-2 cancel-edit" (click)="rBook.isEditCart = false"></i>
+                            </div>
+                        </span>
+                        <div class="total-item">
+                            <span><strong>Valor total do Item: </strong>{{ rBook.value * rBook.rentDays |
+                                currency: 'BRL'}}</span>
+                        </div>
+                    </div>
+                    <div class="cart-item-action">
+                        <div class="cart-item-action-options">
+                            <i class="fas fa-trash delete" (click)="removeRentingItem(rBook.id)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="(totalAmount | async)! > 0" class="total">
+        <h4>Total</h4>
+        <span class="total-value"> {{ totalAmount | async | currency:'BRL'}}</span>
+        <button class="btn btn-primary" (click)="openConfirmation()">Concluir compra</button>
+    </section>
+    <section *ngIf="(shoppingBooks | async)!.length === 0 && (rentingBooks | async)!.length === 0"
+        class="text-center mt-5">
+        <p>Nenhum item adicionado ao carrinho ainda. <a [routerLink]="['/shopping']">Ir as compras</a></p>
+    </section>
+</main>
+
+<div class="modal fade" [ngClass]="{ 'show': isConfirmationModalVisible, 'd-block': isConfirmationModalVisible }">
+    <div class="modal-dialog">
+        <form (submit)="$event.preventDefault(); finishShopping()" [formGroup]="confirmationForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmação de compra/aluguel</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label class="form-label" for="email">Confirme seu e-mail</label>
+                            <input class="form-control" type="text" id="email" formControlName="email" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="closeConfirmationModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="confirmationForm.invalid">Concluir
+                        compra</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal-backdrop fade"
+    [ngClass]="{ 'show': isConfirmationModalVisible, 'd-block': isConfirmationModalVisible, 'd-none': !isConfirmationModalVisible }">
+</div>

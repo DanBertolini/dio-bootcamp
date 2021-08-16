@@ -1,0 +1,34 @@
+.bookcamp-logo {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+
+    img {
+        width: 10%;
+        margin-right: 10px;
+        padding: 10px 10px 0px 10px;
+    }
+
+    .bookcamp-title {
+        font-weight: 500;
+    }
+}
+
+.divider {
+    border-left: 1px solid #ccc;
+}
+
+.cart-itens-quantity {
+    display: inline-block;
+    color: #000;
+    background-color: #fff;
+    border-radius: 100px;
+    height: 15px;
+    width: 15px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 900;
+    position: relative;
+    top: -10px;
+    left: -5px;
+}

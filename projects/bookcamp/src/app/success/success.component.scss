@@ -1,0 +1,16 @@
+.success-box {
+    .success {
+        height: 50vh;
+        padding: 50px;
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        font-size: 2.5rem;
+        justify-content: space-around;
+
+        i {
+            color: rgb(56, 161, 74);
+            font-size: 5rem;
+        }
+    }
+}
