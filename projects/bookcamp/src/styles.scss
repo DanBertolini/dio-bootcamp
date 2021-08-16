@@ -1,0 +1,300 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Layout */
+
+body.modal-open {
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.page-title {
+    margin-bottom: 10px;
+}
+
+/* Layout */
+
+/* Filtro */
+
+.filter {
+    .filter-label {
+        font-weight: 700;
+        cursor: pointer;
+
+        i {
+            margin-left: 0.25rem;
+            color: #888;
+        }
+    }
+
+    .filter-form {
+        padding: 0.5rem;
+        max-height: 0px;
+        overflow: hidden;
+        box-sizing: content-box;
+        opacity: 0;
+
+        &.close {
+            animation-duration: 900ms;
+            animation-name: slide-up;
+            animation-timing-function: ease-in-out;
+        }
+
+        &.visible {
+            max-height: initial;
+            opacity: 1;
+            animation-duration: 900ms;
+            animation-name: slide-down;
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
+
+@keyframes slide-down {
+    from {
+        max-height: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+
+    to {
+        max-height: initial;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        max-height: initial;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+
+    to {
+        max-height: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+}
+/* Filtro */
+
+/* Ordernação*/
+
+.order {
+    position: relative;
+    display: inline-block;
+    margin: 0px 1rem;
+    font-weight: 700;
+
+    button {
+        background-color: transparent;
+        border: none;
+        color: #444;
+        font-size: 0.9rem;
+        font-weight: 200;
+
+        i {
+            margin-left: 0.25rem;
+            color: #888;
+        }
+    }
+
+    .order-panel {
+        padding: 0;
+        position: absolute;
+        text-align: left;
+        list-style: none;
+        right: 0;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        max-height: 0px;
+        overflow: hidden;
+        z-index: 1;
+        opacity: 0;
+
+        li {
+            padding: 0.5rem;
+            padding-left: 0.75rem;
+
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 0.9rem;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            box-sizing: border-box;
+            position: relative;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid #ccc;
+            }
+
+            &:hover {
+                background-color: #ccc;
+            }
+
+            a {
+                text-decoration: none;
+                color: #444;
+
+                &.active {
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        border-left: 5px solid #212529;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+
+        &.close {
+            animation-delay: 0ms, 400ms;
+            animation-duration: 900ms, 300ms;
+            animation-fill-mode: both;
+            animation-name: close-options;
+            animation-timing-function: ease-in-out;
+        }
+
+        &.visible {
+            animation-delay: 0ms, 400ms;
+            animation-duration: 900ms, 300ms;
+            animation-fill-mode: both;
+            animation-name: open-options;
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
+
+@keyframes open-options {
+    from {
+        max-height: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+
+    to {
+        max-height: initial;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+}
+
+@keyframes close-options {
+    from {
+        max-height: initial;
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+
+    to {
+        max-height: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+    }
+}
+/* Ordernação*/
+
+/* Livros */
+
+.books {
+    margin-top: 30px;
+
+    .book {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        min-height: 350px;
+
+        &:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .book-info {
+            display: flex;
+            flex-flow: column;
+            flex-grow: 1;
+            padding: 10px;
+            width: 200px;
+
+            .cover {
+                margin-bottom: 15px;
+                width: 150px;
+            }
+
+            .author,
+            .genre {
+                font-size: 0.75rem;
+                white-space: normal;
+            }
+        }
+
+        .book-content {
+            flex-grow: 4;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+
+            .book-value {
+                color: #444;
+
+                .book-value--disclaimer {
+                    font-size: 0.65rem;
+                    color: #444;
+                }
+            }
+
+            .book-description {
+                margin-top: 10px;
+                font-size: 0.75rem;
+                line-height: 20px;
+
+                .book-description--read-more {
+                    margin-top: 5px;
+                    color: #888;
+                    cursor: pointer;
+                    display: block;
+                }
+            }
+        }
+
+        .shopping-action {
+            border-left: 1px solid #888;
+            margin-left: 20px;
+            width: 20%;
+            flex-grow: 2;
+            position: relative;
+
+            .shopping-action-options {
+                text-align: center;
+                margin: 0;
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                .btn {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+}
+
+/* Livros */

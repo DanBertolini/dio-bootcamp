@@ -1,0 +1,113 @@
+.books-cart {
+    margin-top: 30px;
+
+    .book-cart {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        padding: 1.5rem;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border-radius: 5px;
+        margin-bottom: 20px;
+
+        &:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .book-info {
+            display: flex;
+            flex-flow: column;
+            flex-grow: 1;
+            padding: 10px;
+            width: 100px;
+
+            .cover {
+                width: 75px;
+            }
+        }
+
+        .book-content {
+            flex-grow: 4;
+            width: 75%;
+            display: flex;
+            flex-direction: column;
+
+            .book-value {
+                color: #444;
+                position: relative;
+
+                .rent-days-input {
+                    width: 75px;
+                    display: inline;
+                }
+                .rent-days-label {
+                    color: #444;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+
+                .save-edit {
+                    cursor: pointer;
+                    color: rgb(45, 121, 43);
+                    display: inline-block;
+
+                    &.disabled {
+                        color: rgb(180, 235, 178);
+                        cursor: initial;
+                    }
+                }
+
+                .cancel-edit {
+                    cursor: pointer;
+                    display: inline-block;
+                    color: rgb(175, 49, 49);
+                }
+            }
+
+            .total-item {
+                margin-top: 20px;
+            }
+        }
+
+        .cart-item-action {
+            border-left: 1px solid #888;
+            margin-left: 20px;
+            width: 10%;
+            flex-grow: 2;
+            position: relative;
+
+            .cart-item-action-options {
+                text-align: center;
+                margin: 0;
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+                .delete {
+                    font-size: 2rem;
+                    color: #666;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.total {
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 75px 0px 25px;
+    border-top: 1px solid #ccc;
+
+    h4 {
+        flex-grow: 10;
+    }
+    .total-value {
+        flex-grow: 1;
+    }
+}

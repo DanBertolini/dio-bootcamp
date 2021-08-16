@@ -1,0 +1,30 @@
+<header class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="container-xxl flex-wrap flex-md-nowrap" aria-label="menu para navegar">
+        <a class="navbar-brand bookcamp-logo" [routerLink]="['']">
+            <img src="/assets/book-camp-logo.png" class="img-fluid" />
+            <h1 class="display-6 bookcamp-title">Bookcamp</h1>
+        </a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item ms-4 me-4">
+                <a class="nav-link" aria-current="page" [routerLink]="['/shopping']"
+                    [routerLinkActive]="['active']">Comprar</a>
+            </li>
+            <li class="nav-item ms-4 me-4">
+                <a class="nav-link" aria-current="page" [routerLink]="['/rent']"
+                    [routerLinkActive]="['active']">Alugar</a>
+            </li>
+            <li class="divider"></li>
+            <li class="nav-item ms-4 me-4 shopping-cart">
+                <a class="nav-link" aria-current="page" [routerLink]="['/shopping-cart']"
+                    [routerLinkActive]="['active']">
+                    <span>Meu carrinho</span>
+                    <i class="fas fa-shopping-cart ms-3"></i>
+                    <span class="cart-itens-quantity">{{ shoppingCartService.getQuantityOfItens() | async }}</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container-xxl my-md-4 bd-layout">
+    <router-outlet></router-outlet>
+</div>

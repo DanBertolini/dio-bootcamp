@@ -1,0 +1,218 @@
+{
+    "payment-style": {
+        "scope": "scss",
+        "prefix": "payment-style",
+        "body": [
+            ".payment {",
+            "    padding: 10px;",
+            "    border: solid 1px #eee;",
+            "    border-radius: 25px;",
+            "",
+            "    .total {",
+            "        font-size: 1.5rem;",
+            "",
+            "        .total-value {",
+            "            color: #4c4c9e;",
+            "        }",
+            "    }",
+            "}"
+        ]
+    },
+    "payment-html": {
+        "scope": "html",
+        "prefix": "payment-html",
+        "body": [
+            "<div class=\"payment\">",
+            "    <div class=\"container-fluid\">",
+            "        <div class=\"row\">",
+            "            <span class=\"total\">",
+            "                Valor Total",
+            "                <strong class=\"total-value\">",
+            "                    ",
+            "                </strong>",
+            "            </span>",
+            "        </div>",
+            "        <div>",
+            "           ",
+            "        </div>",
+            "        <div>",
+            "           ",
+            "        </div>",
+            "        <div>",
+            "           ",
+            "        </div>",
+            "    </div>",
+            "</div>"
+        ]
+    },
+    "payment-ways-style": {
+        "scope": "scss",
+        "prefix": "payment-ways-style",
+        "body": [".payment-way {", "    margin-top: 15px;", "    margin-bottom: 15px;", "}"]
+    },
+    "payment-ways-html": {
+        "scope": "html",
+        "prefix": "payment-ways-html",
+        "body": [
+            "<div class=\"payment-way row\">",
+            "    <div class=\"col-md-8\">",
+            "        <label class=\form-label\" for=\"payment-way\">Qual a forma de pagamento?</label>",
+            "        <select id=\"payment-way\" class=\"form-select\">",
+            "            <option>",
+            "                ",
+            "            </option>",
+            "        </select>",
+            "    </div>",
+            "</div>"
+        ]
+    },
+    "promotional-coupon-style": {
+        "scope": "scss",
+        "prefix": "promotional-coupon-style",
+        "body": [
+            ".coupon {",
+            "    margin-top: 15px;",
+            "    margin-bottom: 15px;",
+            "",
+            "    .code,",
+            "    .promotion {",
+            "        margin-top: 10px;",
+            "",
+            "        span {",
+            "            vertical-align: -webkit-baseline-middle;",
+            "        }",
+            "    }",
+            "}"
+        ]
+    },
+    "promotional-coupons-html": {
+        "scope": "html",
+        "prefix": "promotional-coupons-html",
+        "body": [
+            "<div class=\"row coupon\">",
+            "    <h5>Código Promocional</h5>",
+            "    <div class=\"col-md-3 code\">",
+            "        <input class=\"form-control\" placeholder=\"Digite o código...\" />",
+            "    </div>",
+            "    <div class=\"col-md-3 promotion\">",
+            "        <span></span>",
+            "    </div>",
+            "</div>"
+        ]
+    },
+    "credit-card-style": {
+        "scope": "scss",
+        "prefix": "credit-card-style",
+        "body": [
+            ".credit-card {",
+            "    margin-top: 15px;",
+            "    margin-bottom: 15px;",
+            "",
+            "    .legend {",
+            "        color: #888;",
+            "    }",
+            "    .card-field {",
+            "        margin-top: 10px;",
+            "        margin-bottom: 10px;",
+            "    }",
+            "}"
+        ]
+    },
+    "credit-card-html": {
+        "scope": "html",
+        "prefix": "credit-card-html",
+        "body": [
+            "<div class=\"credit-card\">",
+            "    <h5>Cartão de Crédito</h5>",
+            "    <form>",
+            "        <fieldset class=\"form-group\">",
+            "            <div class=\"row\">",
+            "                <legend class=\"col-form-label col-sm-2 pt-0 legend\">Dados do Cartão</legend>",
+            "            </div>",
+            "            <div class=\"row\">",
+            "                <div class=\"col-md-6 card-field\">",
+            "                    <label class=\"form-label\" for=\"credit-card-number\">Número do Cartão</label>",
+            "                    <input type=\"text\" class=\"form-control\" id=\"credit-card-number\" maxlength=\"16\" minlength=\"16\"",
+            "                        required>",
+            "                </div>",
+            "                <div class=\"col-md-6 card-field\">",
+            "                    <label class=\"form-label\" for=\"credit-card-name\">Nome do Titular</label>",
+            "                    <input type=\"text\" class=\"form-control\" id=\"credit-card-name\" required>",
+            "                </div>",
+            "                <div class=\"col-md-6 card-field\">",
+            "                    <label class=\"form-label\" for=\"credit-card-expiring\">Vencimento</label>",
+            "                    <input type=\"month\" class=\"form-control\" id=\"credit-card-expiring\" required>",
+            "                </div>",
+            "                <div class=\"col-md-6 card-field\">",
+            "                    <label class=\"form-label\" for=\"credit-card-cvv\">CVV</label>",
+            "                    <input type=\"password\" class=\"form-control\" id=\"credit-card-cvv\" autocomplete=\"off\" maxlength=\"3\"",
+            "                        minlength=\"3\" required>",
+            "                </div>",
+            "            </div>",
+            "        </fieldset>",
+            "        <hr />",
+            "        <fieldset class=\"form-group\">",
+            "            <div class=\"row\">",
+            "                <legend class=\"col-form-label col-sm-2 pt-0 legend\">Dados de Pagamento</legend>",
+            "            </div>",
+            "            <div class=\"row\">",
+            "                <div class=\"col-md-6\">",
+            "                    <label class=\"form-label\" for=\"payment-parcel\">Parcelamento</label>",
+            "                    <select id=\"payment-parcel\" class=\"form-select\">",
+            "                        <option>",
+            "                           ",
+            "                        </option>",
+            "                    </select>",
+            "                </div>",
+            "            </div>",
+            "        </fieldset>",
+            "    </form>",
+            "</div>"
+        ]
+    },
+    "payment-options-array": {
+        "scope": "typescript",
+        "prefix": "payment-options-array",
+        "body": [
+            "public paymentOptions: Array<PaymentOption> = [",
+            "    { display: 'Pix', value: 'pix', discount: 5 },",
+            "    { display: 'Cartão de Crédito', value: 'credit-card', discount: 0 },",
+            "    { display: 'PayPal', value: 'pay-pal', discount: 3 },",
+            "    { display: 'Boleto', value: 'boleto', discount: 2.5 },",
+            "];"
+        ]
+    },
+    "credit-card-parcel-options": {
+        "scope": "typescript",
+        "prefix": "credit-card-parcel-options",
+        "body": [
+            "this.parcelOptions = [",
+            "    { display: '1x sem juros', value: 1, tax: 0 },",
+            "    { display: '2x sem juros', value: 2, tax: 0 },",
+            "    { display: '3x sem juros', value: 3, tax: 0 },",
+            "    { display: '4x com juros de 0,2% a.m.', value: 4, tax: .2 / 100 },",
+            "    { display: '5x com juros de 0,25% a.m.', value: 5, tax: .25 / 100 },",
+            "    { display: '6x com juros de 0,3% a.m.', value: 6, tax: .3 / 100 },",
+            "    { display: '7x com juros de 0,35% a.m.', value: 7, tax: .35 / 100 },",
+            "    { display: '8x com juros de 0,4% a.m.', value: 8, tax: .4 / 100 },",
+            "    { display: '9x com juros de 0,45% a.m.', value: 9, tax: .45 / 100 },",
+            "    { display: '10x com juros de 0,5% a.m.', value: 10, tax: .5 / 100 },",
+            "    { display: '11x com juros de 0,75% a.m.', value: 11, tax: .75 / 100 },",
+            "    { display: '12x com juros de 1,0% a.m.', value: 12, tax: 1 / 100 },",
+            "];"
+        ]
+    },
+    "credit-card-form": {
+        "scope": "typescript",
+        "prefix": "credit-card-form",
+        "body": [
+            "public ccFormGroup = new FormGroup({",
+            "    number: new FormControl('', Validators.required),",
+            "    name: new FormControl('', Validators.required),",
+            "    expiring: new FormControl('', Validators.required),",
+            "    cvv: new FormControl('', Validators.required),",
+            "    parcel: new FormControl(1, Validators.required),",
+            "});"
+        ]
+    }
+}
