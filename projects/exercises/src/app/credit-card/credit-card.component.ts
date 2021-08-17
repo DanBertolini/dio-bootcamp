@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ParcelOption } from '../models/parcel-option.interface';
+import { PromotionalCouponService } from '../services/promotional-coupon.service';
 
 @Component({
     selector: 'app-credit-card',
@@ -8,10 +9,23 @@ import { ParcelOption } from '../models/parcel-option.interface';
 })
 export class CreditCardComponent implements OnInit {
 
+    @Output() parcelChange: EventEmitter<ParcelOption> = new EventEmitter<ParcelOption>();
+
     public selectedParcelOption = 1;
     public parcelOptions: Array<ParcelOption> = [];
 
-    constructor() { }
+    constructor(private promotionalCouponService: PromotionalCouponService) {
+        this.promotionalCouponService.hasTaxesExemption()
+            .subscribe((hasExemption) => {
+                if (hasExemption) {
+                    this.updateParcelWithNoTaxes();
+                } else {
+                    this.initOptions();
+                }
+
+                this.updateParcel();
+            });
+    }
 
     ngOnInit(): void {
         this.initOptions();
@@ -34,7 +48,25 @@ export class CreditCardComponent implements OnInit {
         ];
     }
 
-    public onlyNumbers(event: KeyboardEvent): void {
+    public updateParcelWithNoTaxes(): void {
+        this.parcelOptions = this.parcelOptions.map((parcel) => {
+            return {
+                display: `${parcel.value}x sem juros`,
+                value: parcel.value,
+                tax: 0,
+            }
+        });
+    }
+
+    public updateParcel(): void {
+        const parcelOption = this.parcelOptions.find((option) => option.value == this.selectedParcelOption);
+
+        if (parcelOption !== undefined) {
+            this.parcelChange.emit(parcelOption);
+        }
+    }
+
+    public validateOnlyNumbers(event: KeyboardEvent): void {
         if (isNaN(parseInt(event.key))) {
             event.preventDefault();
         }

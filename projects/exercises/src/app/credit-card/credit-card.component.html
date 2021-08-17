@@ -9,7 +9,7 @@
                 <div class="col-md-6 card-field">
                     <label class="form-label" for="credit-card-number">Número do Cartão</label>
                     <input type="text" class="form-control" id="credit-card-number" maxlength="16" minlength="16"
-                        required (keypress)="onlyNumbers($event)">
+                        required (keypress)="validateOnlyNumbers($event)">
                 </div>
                 <div class="col-md-6 card-field">
                     <label class="form-label" for="credit-card-name">Nome do Titular</label>
@@ -22,7 +22,7 @@
                 <div class="col-md-6 card-field">
                     <label class="form-label" for="credit-card-cvv">CVV</label>
                     <input type="password" class="form-control" id="credit-card-cvv" autocomplete="off" maxlength="3"
-                        minlength="3" required (keypress)="onlyNumbers($event)">
+                        minlength="3" required (keypress)="validateOnlyNumbers($event)">
                 </div>
             </div>
         </div>
@@ -34,7 +34,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="form-label" for="payment-parcel">Parcelamento</label>
-                    <select id="payment-parcel" class="form-select" [(ngModel)]="selectedParcelOption">
+                    <select id="payment-parcel" class="form-select" [(ngModel)]="selectedParcelOption"
+                        (ngModelChange)="updateParcel()">
                         <option *ngFor="let parcelOption of parcelOptions" [value]="parcelOption.value">
                             {{ parcelOption.display }}
                         </option>

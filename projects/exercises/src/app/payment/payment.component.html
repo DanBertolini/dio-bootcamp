@@ -4,15 +4,15 @@
             <span class="total">
                 Valor Total
                 <strong class="total-value">
-                    {{ totalValue | currency: 'BRL' }}
+                    {{ calculatedValue | currency: 'BRL' }}
                 </strong>
             </span>
         </div>
         <div>
-            <app-payment-ways></app-payment-ways>
+            <app-payment-ways (paymentWayChange)="updatePaymentWay($event)"></app-payment-ways>
         </div>
-        <div>
-            <app-credit-card></app-credit-card>
+        <div *ngIf="isCreditCardPayment">
+            <app-credit-card (parcelChange)="updateParcel($event)"></app-credit-card>
         </div>
         <div>
             <app-promotional-coupon></app-promotional-coupon>

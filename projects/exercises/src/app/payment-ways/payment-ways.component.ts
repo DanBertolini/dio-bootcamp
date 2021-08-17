@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { PaymentOption } from '../models/payment-option.interface';
 import { PaymentWays } from '../models/payment-ways.enum';
@@ -9,6 +9,8 @@ import { PaymentWays } from '../models/payment-ways.enum';
     styleUrls: ['./payment-ways.component.scss']
 })
 export class PaymentWaysComponent implements OnInit {
+
+    @Output() paymentWayChange: EventEmitter<PaymentOption> = new EventEmitter<PaymentOption>();
 
     public selectedPaymentWay = PaymentWays.CREDIT_CARD;
 
@@ -22,6 +24,14 @@ export class PaymentWaysComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+        this.updatePaymentWay();
+    }
+
+    public updatePaymentWay(): void {
+        const paymentOption = this.paymentOptions.find((option) => option.value === this.selectedPaymentWay);
+        if (paymentOption !== undefined) {
+            this.paymentWayChange.emit(paymentOption);
+        }
     }
 
 }

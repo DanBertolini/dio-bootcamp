@@ -1,7 +1,8 @@
 <div class="payment-way row">
     <div class="col-md-8">
         <label class="form-label" for="payment-way">Qual a forma de pagamento?</label>
-        <select id="payment-way" class="form-select" [(ngModel)]="selectedPaymentWay">
+        <select id="payment-way" class="form-select" [(ngModel)]="selectedPaymentWay"
+            (ngModelChange)="updatePaymentWay()">
             <option *ngFor="let paymentOption of paymentOptions" [value]="paymentOption.value">
                 {{ paymentOption.display }}
             </option>
