@@ -56,7 +56,7 @@
         "body": [
             "<div class=\"payment-way row\">",
             "    <div class=\"col-md-8\">",
-            "        <label class=\form-label\" for=\"payment-way\">Qual a forma de pagamento?</label>",
+            "        <label class=\"form-label\" for=\"payment-way\">Qual a forma de pagamento?</label>",
             "        <select id=\"payment-way\" class=\"form-select\">",
             "            <option>",
             "                ",
@@ -124,10 +124,10 @@
         "body": [
             "<div class=\"credit-card\">",
             "    <h5>Cartão de Crédito</h5>",
-            "    <form>",
-            "        <fieldset class=\"form-group\">",
+            "    <div>",
+            "        <div class=\"form-group\">",
             "            <div class=\"row\">",
-            "                <legend class=\"col-form-label col-sm-2 pt-0 legend\">Dados do Cartão</legend>",
+            "                <span class=\"col-form-label col-sm-2 pt-0 legend\">Dados do Cartão</span>",
             "            </div>",
             "            <div class=\"row\">",
             "                <div class=\"col-md-6 card-field\">",
@@ -149,9 +149,9 @@
             "                        minlength=\"3\" required>",
             "                </div>",
             "            </div>",
-            "        </fieldset>",
+            "        </div>",
             "        <hr />",
-            "        <fieldset class=\"form-group\">",
+            "        <div class=\"form-group\">",
             "            <div class=\"row\">",
             "                <legend class=\"col-form-label col-sm-2 pt-0 legend\">Dados de Pagamento</legend>",
             "            </div>",
@@ -165,10 +165,30 @@
             "                    </select>",
             "                </div>",
             "            </div>",
-            "        </fieldset>",
-            "    </form>",
+            "        </div>",
+            "    </div>",
             "</div>"
         ]
+    },
+    "coupon-interface": {
+        "scope": "typescript",
+        "prefix": "coupon-interface",
+        "body": ["code: string;", "type: 'discount' | 'tax-exemption';", "value?: number;"]
+    },
+    "parcel-option-interface": {
+        "scope": "typescript",
+        "prefix": "parcel-option-interface",
+        "body": ["display: string;", "value: number;", "tax: number;"]
+    },
+    "payment-option-interface": {
+        "scope": "typescript",
+        "prefix": "payment-option-interface",
+        "body": ["display: string;", "value: number;", "discount: number;"]
+    },
+    "payment-options-enum": {
+        "scope": "typescript",
+        "prefix": "payment-options-enum",
+        "body": ["PIX = 'pix',", "CREDIT_CARD = 'credit-card',", "PAY_PAL = 'pay-pal',", "BOLETO = 'boleto',"]
     },
     "payment-options-array": {
         "scope": "typescript",
@@ -202,17 +222,14 @@
             "];"
         ]
     },
-    "credit-card-form": {
+    "promotional-coupon-options": {
         "scope": "typescript",
-        "prefix": "credit-card-form",
+        "prefix": "promotional-code-options",
         "body": [
-            "public ccFormGroup = new FormGroup({",
-            "    number: new FormControl('', Validators.required),",
-            "    name: new FormControl('', Validators.required),",
-            "    expiring: new FormControl('', Validators.required),",
-            "    cvv: new FormControl('', Validators.required),",
-            "    parcel: new FormControl(1, Validators.required),",
-            "});"
+            "public availableCoupons: Array<Coupon> = [",
+            "    { code: 'DIO', type: 'discount', value: 5 },",
+            "    { code: 'ANGULAR', type: 'tax-exemption' },",
+            "];"
         ]
     }
 }

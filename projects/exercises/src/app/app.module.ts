@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import ptBr from '@angular/common/locales/pt';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-registerLocaleData(ptBr);
+// registerLocaleData(ptBr);
 
 @NgModule({
     declarations: [
@@ -14,10 +14,11 @@ registerLocaleData(ptBr);
     ],
     imports: [
         BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
+        // FormsModule,
     ],
-    providers: [],
+    providers: [
+        // { provide: LOCALE_ID, useValue: 'pt-BR' }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
