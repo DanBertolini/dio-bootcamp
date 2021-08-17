@@ -28,6 +28,8 @@ export class PromotionalCouponComponent implements OnInit {
             } else if (coupon.type === 'tax-exemption') {
                 this.couponMessage = 'Isenção de juros nas parcelas';
             }
+        } else {
+            this.couponMessage = '';
         }
     }
 
