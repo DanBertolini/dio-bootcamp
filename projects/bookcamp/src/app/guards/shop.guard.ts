@@ -3,11 +3,12 @@ import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } fro
 import { Observable } from 'rxjs';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 
+// ==== Recomendado não mexer antes de finalizar os cursos ou sem conhecimento prévio ====
 @Injectable({
     providedIn: 'root',
 })
 export class ShoppingGuard implements CanActivate {
-    constructor(private shoppingCartService: ShoppingCartService) {}
+    constructor(private shoppingCartService: ShoppingCartService) { }
 
     canActivate(
         route: ActivatedRouteSnapshot,
@@ -16,3 +17,5 @@ export class ShoppingGuard implements CanActivate {
         return this.shoppingCartService.getQuantityOfItensAsync() > 0;
     }
 }
+
+// ==== Recomendado não mexer antes de finalizar os cursos ou sem conhecimento prévio ====

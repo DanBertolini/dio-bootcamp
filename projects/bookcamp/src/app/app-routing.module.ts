@@ -8,6 +8,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { SuccessComponent } from './success/success.component';
 
+// ==== Recomendado não mexer antes de finalizar os cursos ou sem conhecimento prévio ====
+
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'shopping', component: ShoppingComponent },
@@ -20,4 +22,6 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
+
+// ==== Recomendado não mexer antes de finalizar os cursos ou sem conhecimento prévio ====
