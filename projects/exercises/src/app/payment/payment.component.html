@@ -1,0 +1,21 @@
+<div class="payment">
+    <div class="container-fluid">
+        <div class="row">
+            <span class="total">
+                Valor Total
+                <strong class="total-value">
+                    {{ totalValue | currency: 'BRL' }}
+                </strong>
+            </span>
+        </div>
+        <div>
+            <app-payment-ways></app-payment-ways>
+        </div>
+        <div>
+            <app-credit-card></app-credit-card>
+        </div>
+        <div>
+            <app-promotional-coupon></app-promotional-coupon>
+        </div>
+    </div>
+</div>

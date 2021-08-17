@@ -1,0 +1,13 @@
+.payment {
+    padding: 10px;
+    border: solid 1px #eee;
+    border-radius: 25px;
+
+    .total {
+        font-size: 1.5rem;
+
+        .total-value {
+            color: #4c4c9e;
+        }
+    }
+}

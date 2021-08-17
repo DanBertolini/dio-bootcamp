@@ -1,0 +1,13 @@
+.coupon {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    .code,
+    .promotion {
+        margin-top: 10px;
+
+        span {
+            vertical-align: -webkit-baseline-middle;
+        }
+    }
+}
