@@ -2,9 +2,6 @@ import { Book } from './book.interface';
 export class BookView {
     public readMoreDescription: boolean = false;
 
-    public showEvaluations: boolean = false;
-    public stars = Array(5);
-
     public id: number;
     public relevanceId: number;
     public title: string;
