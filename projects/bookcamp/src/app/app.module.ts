@@ -16,7 +16,7 @@ registerLocaleData(ptBr);
 
 @NgModule({
     declarations: [AppComponent, ShoppingComponent, RentComponent, HomeComponent, ShoppingCartComponent, SuccessComponent],
-    imports: [BrowserModule, AppRoutingModule, FormsModule],
+    imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule],
     providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
     bootstrap: [AppComponent],
 })
