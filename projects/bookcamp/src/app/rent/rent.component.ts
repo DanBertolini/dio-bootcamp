@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, MinLengthValidator } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BookView } from '../models/book-view.model';
 import { FilterOptions } from '../models/filter-options.model';
 import { GenreSelectItem } from '../models/genre-select-item.interface';
 import { OrderFn } from '../models/order-fn.type';
@@ -44,13 +45,6 @@ export class RentComponent implements OnInit {
 
     public ngOnInit(): void {
         this.getBooks();
-
-        this.getGenreOptions();
-        this.filterForm.patchValue({
-            genre: this.genreOptions.map((genre) => genre.value),
-        });
-        this.setOrderBy(OrderOptions.RELEVANT, false);
-        this.listenClickOutOrderOptions();
     }
 
     public getBooks(): void {
@@ -62,131 +56,16 @@ export class RentComponent implements OnInit {
         return seeMore ? bookDescription : `${bookDescription.substring(0, 500).trim()}...`;
     }
 
-    // #region Filtro
-
-    public toggleFilterOptions(): void {
-        this.isFilterOptionVisible = !this.isFilterOptionVisible;
-    }
-
-    public applyFilter(): void {
-        this.filterOptions.title = this.filterForm.controls.title.value;
-        this.filterOptions.priceComparing = this.filterForm.controls.priceComparing.value;
-        this.filterOptions.priceStart = this.filterForm.controls.priceStart.value;
-        this.filterOptions.priceEnd = this.filterForm.controls.priceEnd.value;
-        this.filterOptions.genre = this.filterForm.controls.genre.value;
-
+    public filterBooks(filteredBooks: Array<BookView>): void {
         this.filteredBooks = ([] as Array<RentBookView>)
-            .concat(this.books)
-            .filter(this.titleFilter.bind(this))
-            .filter(this.priceFilter.bind(this))
-            .filter(this.genreFilter.bind(this));
-
-        this.isFilterOptionVisible = false;
+            .concat(filteredBooks as Array<RentBookView>);
     }
 
-    private titleFilter(book: RentBookView): boolean {
-        return !this.isFilterValid(this.filterOptions.title)
-            ? true
-            : book.title.toLowerCase().includes(this.filterOptions.title.toLowerCase());
-    }
-
-    private priceFilter(book: RentBookView): boolean {
-        const hasToCheckStartPrice =
-            this.filterOptions.priceComparing === PriceComparing.GREATER_EQUAL ||
-            this.filterOptions.priceComparing === PriceComparing.BETWEEN;
-        const isPriceStartValid =
-            !this.isFilterValid(this.filterOptions.priceStart) || !hasToCheckStartPrice
-                ? true
-                : book.value >= this.filterOptions.priceStart;
-
-        const hasToCheckEndPrice =
-            this.filterOptions.priceComparing === PriceComparing.LOWER_EQUAL ||
-            this.filterOptions.priceComparing === PriceComparing.BETWEEN;
-        const isPriceEndValid =
-            !this.isFilterValid(this.filterOptions.priceEnd) || !hasToCheckEndPrice ? true : book.value <= this.filterOptions.priceEnd;
-
-        return isPriceStartValid && isPriceEndValid;
-    }
-
-    private genreFilter(book: RentBookView): boolean {
-        return book.genre.some((genre) => {
-            return this.filterOptions.genre.includes(genre);
-        });
-    }
-
-    private isFilterValid(value: unknown): boolean {
-        return value !== '' && value !== undefined && value !== null && value !== NaN;
-    }
-
-    public onGenreSelectChange(genreItem: GenreSelectItem): void {
-        const currentGenres = this.filterForm.get('genre')?.value;
-        const newGenres = genreItem.selected
-            ? currentGenres.concat([genreItem.value])
-            : currentGenres.filter((genre: string) => genre !== genreItem.value);
-        this.filterForm.patchValue({
-            genre: newGenres,
-        });
-    }
-
-    private listenClickOutOrderOptions(): void {
-        window.addEventListener('click', (event) => {
-            const isOrderElement = event.composedPath().find((el: Partial<HTMLElement>) => {
-                return Array.from(el.classList || []).includes('order');
-            });
-            if (!isOrderElement && this.isOrderOptionsVisible !== undefined) {
-                this.isOrderOptionsVisible = false;
-            }
-        });
-    }
-
-    private getGenreOptions(): void {
-        this.genreOptions = this.books
-            .map((book) => book.genre)
-            .reduce((previousValue, currentValue) => {
-                const genres = currentValue.concat(previousValue);
-                return genres.filter((genre, index) => genres.indexOf(genre) === index);
-            }, [])
-            .map((genre) => ({ value: genre, selected: true }));
-    }
-
-    //#endregion Filtro
-
-    //#region Ordenação
-
-    public toggleOrderOptions(): void {
-        this.isOrderOptionsVisible = !this.isOrderOptionsVisible;
-    }
-
-    public setOrderBy(orderOption: OrderOptions, toggleOptions = true): void {
-        this.orderBy = orderOption;
-
-        let sortFn: OrderFn;
-
-        switch (this.orderBy) {
-            case OrderOptions.RELEVANT:
-                sortFn = (bookA, bookB) =>
-                    (bookA.relevanceId > bookB.relevanceId ? 1 : -1);
-                break;
-            case OrderOptions.LOWER_PRICE:
-                sortFn = (bookA, bookB) =>
-                    (bookA.value > bookB.value ? 1 : -1);
-                break;
-            case OrderOptions.GREATER_PRICE:
-                sortFn = (bookA, bookB) =>
-                    (bookA.value < bookB.value ? 1 : -1);
-                break;
-        }
-
+    public orderBooks(orderFn: OrderFn): void {
         this.filteredBooks = ([] as Array<RentBookView>)
             .concat(this.filteredBooks)
-            .sort(sortFn);
-
-        if (toggleOptions) {
-            this.isOrderOptionsVisible = false;
-        }
+            .sort(orderFn)
     }
-
-    //#endregion Ordenação
 
     public addToCart(book: RentBookView): void {
         this.shoppingCartService.addRentingItem({

@@ -3,80 +3,8 @@
         <h2 id="book-renting-title">Aluguel de Livros</h2>
         <hr />
     </div>
-    <div class="filter" *ngIf="books.length > 0">
-        <div class="d-flex flex-row-reverse">
-            <div class="filter-label" (click)="toggleFilterOptions()">
-                <span>Filtros</span>
-                <i class="fas fa-filter"></i>
-            </div>
-            <div class="order">
-                <span>Ordenar por</span>
-                <button (click)="toggleOrderOptions()">{{ orderBy }}<i class="fas fa-chevron-down fa-xs"></i></button>
-                <ul class="order-panel"
-                    [ngClass]="{ visible: isOrderOptionsVisible === true, close: isOrderOptionsVisible === false }">
-                    <li *ngFor="let orderOption of orderOptions" (click)="setOrderBy(orderOption)">
-                        <a [ngClass]="{ active: orderOption === orderBy }">{{ orderOption }}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="filter-form"
-            [ngClass]="{ visible: isFilterOptionVisible === true, close: isFilterOptionVisible === false }">
-            <form class="row row-cols-lg-auto gy-2 gx-3 align-items-center" [formGroup]="filterForm"
-                (submit)="applyFilter()">
-                <div class="col-md-4">
-                    <label class="form-label" for="title">Título</label>
-                    <input class="form-control" type="text" id="title" formControlName="title" />
-                </div>
-                <div class="col-md-8">
-                    <label class="form-label" for="priceComparing">Preço</label>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <select id="price" class="form-select" formControlName="priceComparing" #pComp>
-                                <option *ngFor="let priceComparingOption of priceComparingOptions"
-                                    [value]="priceComparingOption">
-                                    {{ priceComparingOption }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-3"
-                            *ngIf="pComp.value === priceComparingOptions[0] || pComp.value === priceComparingOptions[2]">
-                            <div class="input-group">
-                                <div class="input-group-text">R$</div>
-                                <input class="form-control" type="text" id="price-start" placeholder="0,00"
-                                    formControlName="priceStart" />
-                            </div>
-                        </div>
-                        <span class="col-md-1 text-center pt-2 ps-0 pe-0 w-auto"
-                            *ngIf="pComp.value === priceComparingOptions[2]"> e </span>
-                        <div class="col-md-3"
-                            *ngIf="pComp.value === priceComparingOptions[1] || pComp.value === priceComparingOptions[2]">
-                            <div class="input-group">
-                                <div class="input-group-text">R$</div>
-                                <input class="form-control" type="text" id="price-end" placeholder="0,00"
-                                    formControlName="priceEnd" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <label class="form-label">Gênero</label>
-                    <div class="form-check" *ngFor="let genre of genreOptions">
-                        <input class="form-check-input" type="checkbox" [attr.id]="genre.value"
-                            [checked]="genre.selected"
-                            (change)="genre.selected = !genre.selected; onGenreSelectChange(genre)" />
-                        <label class="form-check-label" [attr.for]="genre.value">
-                            {{ genre.value }}
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12 mt-4">
-                    <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
-                </div>
-            </form>
-            <hr />
-        </div>
-    </div>
+    <app-filter *ngIf="books.length > 0" [books]="books" (filter)="filterBooks($event)" (order)="orderBooks($event)">
+    </app-filter>
     <div class="books">
         <div *ngFor="let book of filteredBooks" class="book">
             <div class="book-info">
