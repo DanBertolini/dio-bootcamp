@@ -38,9 +38,6 @@
             "        <div>",
             "           ",
             "        </div>",
-            "        <div>",
-            "           ",
-            "        </div>",
             "    </div>",
             "</div>"
         ]
@@ -144,7 +141,7 @@
     "payment-option-interface": {
         "scope": "typescript",
         "prefix": "payment-option-interface",
-        "body": ["display: string;", "value: number;", "discount: number;"]
+        "body": ["display: string;", "value: string;", "discount: number;"]
     },
     "payment-options-enum": {
         "scope": "typescript",
