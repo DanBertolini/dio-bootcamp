@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ParcelOption } from '../models/parcel-option.interface';
 import { PaymentOption } from '../models/payment-option.interface';
 import { PaymentWays } from '../models/payment-ways.enum';
-import { PromotionalCouponService } from '../services/promotional-coupon.service';
 import { Utils } from '../utils';
 
 @Component({
@@ -26,13 +25,7 @@ export class PaymentComponent implements OnInit {
 
     public isCreditCardPayment = false;
 
-    constructor(private promotionalCouponService: PromotionalCouponService) {
-        this.promotionalCouponService.getDiscount()
-            .subscribe((discount) => {
-                this.calculationOptions.couponDiscount = discount;
-                this.calculateTotal();
-            });
-    }
+    constructor() { }
 
     ngOnInit(): void {
         this.calculateTotal();

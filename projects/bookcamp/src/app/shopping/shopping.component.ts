@@ -10,8 +10,8 @@ import { OrderOptions } from '../models/order-options.enum';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { Router } from '@angular/router';
 import { ShoppingBookView } from '../models/shopping-book-view.model';
-import { OrderFn } from '../models/order-fn.type';
 import { BookView } from '../models/book-view.model';
+import { OrderFn } from '../models/order-fn.type';
 
 @Component({
     selector: 'dio-shopping',

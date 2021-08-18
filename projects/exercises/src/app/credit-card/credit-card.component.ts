@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ParcelOption } from '../models/parcel-option.interface';
-import { PromotionalCouponService } from '../services/promotional-coupon.service';
 
 @Component({
     selector: 'app-credit-card',
@@ -14,17 +13,7 @@ export class CreditCardComponent implements OnInit {
     public selectedParcelOption = 1;
     public parcelOptions: Array<ParcelOption> = [];
 
-    constructor(private promotionalCouponService: PromotionalCouponService) {
-        this.promotionalCouponService.hasTaxesExemption()
-            .subscribe((hasExemption) => {
-                if (hasExemption) {
-                    this.updateParcelWithNoTaxes();
-                } else {
-                    this.initOptions();
-                }
-
-                this.updateParcel();
-            });
+    constructor() {
     }
 
     ngOnInit(): void {

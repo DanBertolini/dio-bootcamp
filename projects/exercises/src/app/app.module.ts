@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentWaysComponent } from './payment-ways/payment-ways.component';
 import { CreditCardComponent } from './credit-card/credit-card.component';
-import { PromotionalCouponComponent } from './promotional-coupon/promotional-coupon.component';
 
 registerLocaleData(ptBr);
 
@@ -18,7 +17,6 @@ registerLocaleData(ptBr);
         PaymentComponent,
         PaymentWaysComponent,
         CreditCardComponent,
-        PromotionalCouponComponent,
     ],
     imports: [
         BrowserModule,
