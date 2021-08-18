@@ -10,6 +10,7 @@ import { OrderOptions } from '../models/order-options.enum';
 import { ShoppingCartService } from '../services/shopping-cart.service';
 import { Router } from '@angular/router';
 import { ShoppingBookView } from '../models/shopping-book-view.model';
+import { OrderFn } from '../models/order-fn.type';
 
 @Component({
     selector: 'dio-shopping',
@@ -41,7 +42,7 @@ export class ShoppingComponent implements OnInit {
     public filteredBooks: Array<ShoppingBookView> = [];
     public books: Array<ShoppingBookView> = [];
 
-    constructor(private bookService: BookService, public shoppingCartService: ShoppingCartService, private router: Router) {}
+    constructor(private bookService: BookService, public shoppingCartService: ShoppingCartService, private router: Router) { }
 
     public ngOnInit(): void {
         this.getBooks();
@@ -160,23 +161,27 @@ export class ShoppingComponent implements OnInit {
 
     public setOrderBy(orderOption: OrderOptions, toggleOptions = true): void {
         this.orderBy = orderOption;
+
+        let sortFn: OrderFn;
+
         switch (this.orderBy) {
             case OrderOptions.RELEVANT:
-                this.filteredBooks = ([] as Array<ShoppingBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.relevanceId > bookB.relevanceId ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.relevanceId > bookB.relevanceId ? 1 : -1);
                 break;
             case OrderOptions.LOWER_PRICE:
-                this.filteredBooks = ([] as Array<ShoppingBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.value > bookB.value ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.value > bookB.value ? 1 : -1);
                 break;
             case OrderOptions.GREATER_PRICE:
-                this.filteredBooks = ([] as Array<ShoppingBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.value < bookB.value ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.value < bookB.value ? 1 : -1);
                 break;
         }
+
+        this.filteredBooks = ([] as Array<ShoppingBookView>)
+            .concat(this.filteredBooks)
+            .sort(sortFn);
 
         if (toggleOptions) {
             this.isOrderOptionsVisible = false;

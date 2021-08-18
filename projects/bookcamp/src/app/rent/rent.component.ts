@@ -3,6 +3,7 @@ import { FormControl, FormGroup, MinLengthValidator } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FilterOptions } from '../models/filter-options.model';
 import { GenreSelectItem } from '../models/genre-select-item.interface';
+import { OrderFn } from '../models/order-fn.type';
 import { OrderOptions } from '../models/order-options.enum';
 import { PriceComparing } from '../models/price-comparing.enum';
 import { RentBookView } from '../models/rent-book-view.model';
@@ -39,7 +40,7 @@ export class RentComponent implements OnInit {
     public filteredBooks: Array<RentBookView> = [];
     public books: Array<RentBookView> = [];
 
-    constructor(private bookService: BookService, public shoppingCartService: ShoppingCartService, private router: Router) {}
+    constructor(private bookService: BookService, public shoppingCartService: ShoppingCartService, private router: Router) { }
 
     public ngOnInit(): void {
         this.getBooks();
@@ -158,23 +159,27 @@ export class RentComponent implements OnInit {
 
     public setOrderBy(orderOption: OrderOptions, toggleOptions = true): void {
         this.orderBy = orderOption;
+
+        let sortFn: OrderFn;
+
         switch (this.orderBy) {
             case OrderOptions.RELEVANT:
-                this.filteredBooks = ([] as Array<RentBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.relevanceId > bookB.relevanceId ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.relevanceId > bookB.relevanceId ? 1 : -1);
                 break;
             case OrderOptions.LOWER_PRICE:
-                this.filteredBooks = ([] as Array<RentBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.value > bookB.value ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.value > bookB.value ? 1 : -1);
                 break;
             case OrderOptions.GREATER_PRICE:
-                this.filteredBooks = ([] as Array<RentBookView>)
-                    .concat(this.filteredBooks)
-                    .sort((bookA, bookB) => (bookA.value < bookB.value ? 1 : -1));
+                sortFn = (bookA, bookB) =>
+                    (bookA.value < bookB.value ? 1 : -1);
                 break;
         }
+
+        this.filteredBooks = ([] as Array<RentBookView>)
+            .concat(this.filteredBooks)
+            .sort(sortFn);
 
         if (toggleOptions) {
             this.isOrderOptionsVisible = false;
