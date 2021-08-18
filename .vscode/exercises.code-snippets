@@ -66,40 +66,6 @@
             "</div>"
         ]
     },
-    "promotional-coupon-style": {
-        "scope": "scss",
-        "prefix": "promotional-coupon-style",
-        "body": [
-            ".coupon {",
-            "    margin-top: 15px;",
-            "    margin-bottom: 15px;",
-            "",
-            "    .code,",
-            "    .promotion {",
-            "        margin-top: 10px;",
-            "",
-            "        span {",
-            "            vertical-align: -webkit-baseline-middle;",
-            "        }",
-            "    }",
-            "}"
-        ]
-    },
-    "promotional-coupons-html": {
-        "scope": "html",
-        "prefix": "promotional-coupons-html",
-        "body": [
-            "<div class=\"row coupon\">",
-            "    <h5>Código Promocional</h5>",
-            "    <div class=\"col-md-3 code\">",
-            "        <input class=\"form-control\" placeholder=\"Digite o código...\" />",
-            "    </div>",
-            "    <div class=\"col-md-3 promotion\">",
-            "        <span></span>",
-            "    </div>",
-            "</div>"
-        ]
-    },
     "credit-card-style": {
         "scope": "scss",
         "prefix": "credit-card-style",
@@ -170,11 +136,6 @@
             "</div>"
         ]
     },
-    "coupon-interface": {
-        "scope": "typescript",
-        "prefix": "coupon-interface",
-        "body": ["code: string;", "type: 'discount' | 'tax-exemption';", "value?: number;"]
-    },
     "parcel-option-interface": {
         "scope": "typescript",
         "prefix": "parcel-option-interface",
@@ -219,16 +180,6 @@
             "    { display: '10x com juros de 0,5% a.m.', value: 10, tax: .5 / 100 },",
             "    { display: '11x com juros de 0,75% a.m.', value: 11, tax: .75 / 100 },",
             "    { display: '12x com juros de 1,0% a.m.', value: 12, tax: 1 / 100 },",
-            "];"
-        ]
-    },
-    "promotional-coupon-options": {
-        "scope": "typescript",
-        "prefix": "promotional-code-options",
-        "body": [
-            "public availableCoupons: Array<Coupon> = [",
-            "    { code: 'DIO', type: 'discount', value: 5 },",
-            "    { code: 'ANGULAR', type: 'tax-exemption' },",
             "];"
         ]
     }
